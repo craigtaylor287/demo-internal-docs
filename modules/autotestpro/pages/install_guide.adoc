@@ -1,0 +1,95 @@
+= Autotestpro Installation Guide v5.3
+
+== Introduction 
+
+Note: Prior to re-installing Autotestpro please ensure that you have followed the steps in the 'How to preserve Autotestpro tables and artefacts after a ServiceNow instance clone back' user guide in order to preserve/restore your Autotestpro data.
+
+Autotestpro is comprised of a frontend installed on a ServiceNow instance, and a test engine deployed on an Amazon Web Server.
+
+This document will describe the process for installing the frontend onto a ServiceNow instance and successfully connecting it to a test engine server.
+
+This document assumes that the test engine server will have been setup in advance by Autotestpro. 
+   
+
+== Prerequisites
+
+The resources listed below will be required in order to install the Autotestpro scoped application.
+
+* Autotestpro Update Set.xml
+This contains all of the application files that make up the Autotestpro application.
+
+* sys_user.xml
+This is a ServiceNow User record configured for web services access only and is required for communication with the test engine.
+
+* Password.txt
+A unique password required to be set for the Outbound SOAP message and SOAP message functions.
+
+* Test Runner Endpoint
+A unique endpoint for the server allocated to you for executing tests.
+   
+
+== Installation
+
+=== Stage 1: Retrieve and Commit Update Set
+
+. Navigate to System Update Sets > Retrieved Update Sets, select the related link ‘Import Update Set from XML’ and upload the file ‘update_set_x.xml’.
+
+. Select the imported update set and select ‘Preview Update Set’. 
+
+. After the preview has completed you may be presented with some conflicts to be resolved prior to committing, these conflicts are safe to accept.
+
+. After accepting all updates select ‘Commit Update Set’. If presented with a dialog warning of Data Loss, select ‘Proceed with Commit’.
+On completion of the commit you may be informed that the commit was unsuccessful. You may disregard this warning and continue with the installation - Autotestpro are working on cleaning the application to resolve this warning.
+ 
+
+=== Stage 2: Create Web Service User
+
+Autotestpro requires a Web Services user in order to send test run data to the Test Engine Server. This user is only ever used by the test engine to retrieve test’s ready to be run.
+
+. Import the user record provided ('sys_user.xml') using the same method as the stage above, and assign the user both the 'admin' and 'x_priit_autotest.actions_and_checks_admin' role. 
+
+If the imported user fails to import due to not satisfying certain mandatory criteria set on your sys_user table please create a user with the User ID ‘autotestpro’  with ‘Web service access only’ set to true. Then contact us so we can provide you with the required password for this user.
+
+ 
+
+=== Stage 3: Configure Test Runner Connection
+
+. Navigate to the 'Test Runner Configuration' module in the 'Autotestpro' application.
+
+. Ensure you are in the Autotestpro scope
+
+. Populate the 'Primary Test Runner Endpoint' system property with the endpoint provided to you.
+
+. Populate the 'Test Runner Password' system property with the unique password provided to you in the file 'Password.txt'.
+
+. Change the ‘Basic authentication user password (simple)’ field in the ‘autoTestPRORun SOAP Message Function to the password provided to you in the file ‘Password.txt’. 
+ 
+
+=== Stage 4: Configure ServiceNow Attachments
+
+Autotestpro requires the ability to add attachments of type .log and .png.
+
+A .log file is attached to the Test Run record while screenshots of type .png are attached to each User Task Execution record and also to Defect records.
+
+Please ensure that the System Property 'List of file extensions (comma-separated) that can be attached to documents via the attachment dialog' is either left blank (allowing all types of files extension), or contains both log and png.
+
+You will find this property under 'System Properties' > 'Security' > 'List of file extensions (comma-separated) that can be attached to documents via the attachment dialog'. Please note, extensions should not include the dot (.) e.g. xls,xlsx,doc,docx,log,png.
+
+ 
+
+=== Stage 5: Create Test Environment
+
+Test Runs require a test environment to be specified. A Test Environment is simply a ServiceNow instance that the Test Run will execute against.  
+
+. Navigate to ‘Test Environments’ module and click the 'New' button.
+
+. Enter a ‘Name’ for your environment and specify the URL. For example -  https://mydevinstance.service-now.com
+Note that if your instance has Single Signon (SSO) enabled then you should add '/login.do' to the end of the URL so that tests navigate to the correct login page.
+ 
+The Autotestpro installation is now complete. You may now refer to ‘Autotestpro User Guide’ for details on how to create and run tests with Autotestpro.
+
+   
+
+== Conclusion
+
+The Autotestpro installation is now complete. You may now refer to user guide 'How to Write and Run an Epic in Autotestpro' for details on how to get started with creating and running tests with Autotestpro.

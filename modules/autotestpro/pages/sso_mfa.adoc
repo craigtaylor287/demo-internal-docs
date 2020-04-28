@@ -1,0 +1,59 @@
+= Single Sign-On (SSO) & Multi-Factor Authentication (MFA)
+
+ 
+
+_Note: This article assumes you have already configured your ServiceNow instance to use Single Sign-On._
+
+ 
+
+== 1. Single Sign-On
+The standard login action provided by Autotestpro enables a user to log in to the ServiceNow instance using a local ServiceNow account. In most cases this type of access is acceptable, however, we recognise that in certain circumstances a greater level of security is required. For this reason, we also support logging in via Single Sign-On (SSO).
+
+
+=== 1.1 Supported Single Sign-On Providers
+
+At present, Autotestpro supports SSO provided by Microsoft. All other SSO providers are currently unsupported. If you have a corporate requirement that mandates the use of SSO by a provider not currently supported then please raise an enhancement request via our Customer Portal for consideration by Autotestpro.
+
+
+=== 1.2 Creating a User Task to Log in via SSO
+
+Logging in via SSO is supported by the out of the box Autotestpro action "Log-in via Microsoft SSO". In order to utilise this action create a new User Task and populate the 'Action' field with the "Log-in via Microsoft SSO" action. You will be required to populate the fields 'Login As' and 'Encrypted Password'. When invoking this action please ensure that the user has been redirected to your SSO provider's login page.
+
+image::../imgs/user_guides/sso_mfa/sso1.jpg[]
+
+
+
+== 2. Multi Factor Authentication
+
+Autotestpro also supports login via SSO with Multi Factor Authentication (MFA).
+
+ 
+
+=== 2.1 MFA Methods Supported
+
+At present, Autotestpro supports MFA via one time password verification. All other authentication methods are currently unsupported.
+
+ 
+
+=== 2.2 Configuring Autotestpro for MFA support
+
+Unlike logging in via SSO alone, which is supported out of the box, further configuration is required to support logging in via SSO with additional MFA.
+
+In order for Autotestpro to retrieve a valid one time password at runtime, we need to have access to the same secret key used during set up of the Microsoft Authentication App for the user being used in a Test Run.
+
+Configure the Microsoft Authenticator App for the chosen user as normal, however, take note of the Account Name and Secret Key, as show in the image below. The verifcation required during setup can be done via the App itself or via a browser extension such as Authenticator. Once the App has been successfully verified, raise an Incident via the Autotestpro Customer Portal requesting MFA configuration on your Test Engine, providing us with the Account Name and associated Secret Key. We will then add this configuration to your Test Engine, allowing successfully retrieval of a valid one time code at runtime. We can do this for as many user accounts as required. You will receive confirmation when this has completed. We may wish to liase with you to confirm successful configuration.
+
+ 
+image::../imgs/user_guides/sso_mfa/sso2.png[]
+
+ 
+
+===2.3 Creating a User Task to Log in via SSO with MFA
+
+MFA is handled by the "Log-in via Microsoft SSO" action. During execution the action will determine whether a one time password has been requested on login. If so, a valid one time password is retrieved to enable successful login. This way, the end user creating the Test need not worry whether a one time password is required on every login, is only requested at pre-determined intervals or is not requested at all. 
+
+ 
+
+===2.4 MFA limitations
+
+By design, one time passwords are generated every 30 seconds and may only be used once. This is a security feature that cannot be bypassed. As a result, any concurrent Test Runs attempting to login using the same user account may be forced to wait until a new one time password has been generated. For example, if Test Run A and Test Run B concurrently attempt to login as the same user A may proceed immediately while the B may be forced to wait 30 seconds until a new, valid  one time password can be retrieved.

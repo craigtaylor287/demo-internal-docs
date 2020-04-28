@@ -1,0 +1,3 @@
+= Release Notes
+
+xref:rel_note_5_2_1.adoc[Release 5.2.1]

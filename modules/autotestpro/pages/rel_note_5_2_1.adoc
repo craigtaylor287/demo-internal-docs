@@ -1,0 +1,157 @@
+= Release 5.2.1 Customer Release Notes
+
+== 1. Introduction
+
+This is the customer release note for Release 5.2.1 of Autotestpro. This release note will summarise release highlights along with details of any new functionality introduced in this release. 
+
+== 2. Highlights 
+
+Release 5.2.1 is a patch release of Autotestpro containing defect fixes along with some minor enhancements to the product. The most notable enhancements are as follows:
+
+- New Export/Import functionality
+- Virtual Agent Support
+- Orlando Support
+- Support for logging in via Single Sign-On (SSO)
+- Test Comparison Report
+- Multi-server allocation support
+ 
+
+== 3. Action Required
+
+Customers should run the 'Release 5.2.1 - Populate Table Name' fix script after installing the release. 
+
+== 4. New Functionality 
+
+=== 4.1 New Features
+
+The new functionality introduced in this release is as follows:
+
+. New Export/Import functionality enables users to safely export all their Autotestpro data via Autotestpro itself, removing the need to manually export individual tables as XML. For further information, please refer to How to Export and Import Autotestpro Data.
+
+. Autotestpro now provides Actions and Checks to support the use of ServiceNow's Virtual Agent functionality. For further information, please refer to How to test the Virtual Agent.
+
+. Support added for ServiceNow Orlando.
+ 
+. Added support for logging in to ServiceNow via Single Sign-On (SSO) and Multi-Factor Authentication (MFA). For further information, please refer to Single Sign-On (SSO) & Multi-Factor Authentication (MFA)
+
+. New Test Comparison Report enabling user to compare the results of two Test Runs. 
+
+. Multi-server allocation support, enabling customers who have multiple Test Engine servers to distribute Test Runs across those servers. For further information, please refer to How to Enable the Multi-Test Runner Feature
+
+. New Action to handle an alert box that prompts for text.
+
+. Addition of "Fatal" as an option for Defect priority - if a User Task with this priority fails then the Test Run will stop executing.
+
+=== 4.2 New Actions in R5.2
+
+
+[%header, cols=2*]
+|===
+|Action Name
+|Action Description
+
+|Toggle agent chat window
+|Clicks the Virtual Agent chat button displayed on the Service Portal to either open or close the chat window.
+
+|Add message to agent chat
+|Type a message into the Virtual Agent chat within the Service Portal.
+
+|Select agent chat response
+|Click one of the options displayed by the Virtual Agent in the chat window when the agent asks a question and presents the user with a list of options.
+
+|Click agent chat carousel arrow
+|Clicks the 'previous' or 'next' arrows that appear when there is an image carousel displayed in the Virtual Agent Chat window.
+
+|Click agent chat carousel image
+|Clicks an image that appears in an image carousel displayed in the Virtual Agent Chat window.
+
+|Start new agent chat conversation
+|Start a new Virtual Agent chat conversation by clicking the 'Click here to start a new conversation' link.
+
+|End agent chat conversation
+|End the current Virtual Agent chat conversation by clicking the 'End Conversation' icon.
+
+|Click agent chat button	
+|Clicks a button displayed within the Virtual Agent chat conversation window.
+
+|Select agent chat topic
+|Click one of the Virtual Agent topic options from the list of topics.Note that this action is not for selecting response options to a question asked by the Virtual Agent, for those you should use the 'Select agent chat response' action.
+
+|Click agent chat menu icon
+|Clicks the menu icon (3 dots) on the Virtual Agent Chat window.
+
+|Open record created by agent chat
+|Clicks the record number of a record created by the Virtual Agent in the Virtual Agent Chat window.
+
+|Click agent chat menu option
+|Clicks one of the options displayed in the Virtual Agent Chat menu having already clicked the the menu icon (3 dots) on the Virtual Agent Chat window.
+
+|Store dynamic agent chat reference
+|Stores the record number of a record created by the Virtual Agent in the Virtual Agent Chat window against a label allowing you to use the stored value later on in your test.
+
+|Log in via Microsoft SSO
+|Logs into ServiceNow via Microsoft Single Sign on.
+
+|Click alert button with prompt	
+|When an alert is displayed with a prompt this action will type into the alert and click an the button to accept or reject the alert.
+|===
+ 
+=== 4.3 New Checks in R5.2
+ 
+[%header, cols=2*]
+|===
+|Check Name
+|Check Description
+
+|Agent chat window is displayed
+|Confirms that the Virtual Agent chat window is open (e.g. conversation is visible)
+
+|Agent chat window is not displayed
+|Confirms that the Virtual Agent chat window is not open (e.g. conversation is not visible). 
+
+|Message is displayed in chat conversation
+|Confirms that a message is displayed in the current conversation within the Virtual Agent chat.Important: This only checks the current chat (identified by the '- - - - - - -' separator between conversations) and not any previous conversations that still appear in the chat window.
+
+|Message is not displayed in chat conversation
+|Confirms that a message is not displayed in the current conversation within the Virtual Agent chat.Important: This only checks the current chat (identified by the '- - - - - - -' separator between conversations) and not any previous conversations that still appear in the chat window.
+
+|Chat response choice is present
+|Confirms that an option is displayed by the Virtual Agent in the chat window as part of a question the agent has asked.
+
+|Chat response choice is not present
+|Confirms that an option is not displayed by the Virtual Agent in the chat window as part of a question the agent has asked.
+
+|Chat carousel button clicked
+|Confirms that a button on an image carousel within the Virtual Agent chat conversation has been clicked.
+
+|Chat conversation is active
+|Confirms that the Virtual Agent chat conversation is currently active and that the latest conversation has not been ended.
+
+|Chat conversation is not active
+|Confirms that the latest Virtual Agent chat conversation has ended and that no new conversation has yet been started
+
+|Chat button is displayed
+|Confirms that a button is displayed within the Virtual Agent chat conversation window.
+
+|Chat button is not displayed
+|Confirms that a button is not displayed within the Virtual Agent chat conversation window.
+
+|Chat topic is present
+|Confirms that a Virtual Agent chat Topic is present in a list of topics within the Virtual Agent chat.
+
+|Chat topic is not present	
+|Confirms that a Virtual Agent chat Topic is not present in a list of topics within the Virtual Agent chat.
+
+|Chat menu is open
+|Confirms that the Virtual Agent chat menu is open (e.g. menu options are displayed).
+
+|Chat menu is not open
+|Confirms that the Virtual Agent chat menu is not open (e.g. menu options are not displayed).
+
+|Chat menu option is displayed
+|Confirms that an option within the Virtual Agent chat menu is present. Note that the chat menu must be open in order to perform this check.
+
+|Chat menu option is not displayed
+|Confirms that an option within the Virtual Agent chat menu is not present. Note that the chat menu must be open in order to perform this check.
+ 
+|===
