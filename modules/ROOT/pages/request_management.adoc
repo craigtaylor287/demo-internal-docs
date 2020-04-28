@@ -1,5 +1,3 @@
-_ Currently the only request that can be submitted by customers and partners is an enhancement request _
-
 = Enhancement Requests
 . Are submitted as requested items (RITM’s) from the portal.
 . Upon creation, approval requests are sent to all members of the ‘ATP Support Team’ assignment group.
