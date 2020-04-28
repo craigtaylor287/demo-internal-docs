@@ -1,0 +1,35 @@
+_ Currently the only request that can be submitted by customers and partners is an enhancement request _
+
+= Enhancement Requests
+. Are submitted as requested items (RITM’s) from the portal.
+. Upon creation, approval requests are sent to all members of the ‘ATP Support Team’ assignment group.
+. Only one person is required to approve or reject the request
+* If approving:
+** A User Story is automatically created in ven01581 and linked to a holder Epic – see ‘Contents of created User Story’ section below for a list of data populated on the User Story.
+** A confirmation message that includes the User Story number is automatically added to the ticket.
+** The ticket is automatically closed with a state of ‘Closed (Accepted)’. 
+
+* If rejecting:
+** You must provide a reason for rejecting the request during the approval.
+** Your reason for rejecting is automatically added to the ticket.
+** The ticket is automatically closed with a state of ‘Closed (Rejected)’.
+ 
+
+== Contents of created User Story
+* User Story Name: Short description from the enhancement request
+* User Story Description: Description from the enhancement request
+* External URL: URL of the requested item in business instance
+* External Reference: Number of the requested item in business instance
+* Analysis Notes: Customer justification from the enhancement request
+* Order: 10
+* Priority: Medium
+ 
+
+== Container Epics
+In ven01581 there are 2 Epics used as containers for all customer enhancement requests and the generated User Stories are automatically allocated to one of them when they are created.
+
+The stories in these Epics should be reviewed before each sprint, prioritised in the backlog order, and moved to an appropriate Epic.
+
+* ATREP0002236 Client Feature Requests - Autotestpro
+* ATREP0002237 Client Feature Requests - Fieldmappro
+ 

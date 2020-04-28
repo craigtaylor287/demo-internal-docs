@@ -1,4 +1,4 @@
-* xref:index.adoc[Start Here]
-** xref:install_guide.adoc[Processes]
-** xref:index.adoc[Technical]
+* xref:index.adoc[Internal Processes]
+** xref:request_management.adoc[Request Management]
+
 
