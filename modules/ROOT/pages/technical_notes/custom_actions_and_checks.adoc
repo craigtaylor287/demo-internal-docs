@@ -1,4 +1,4 @@
-= Custom Actions and Checks Tecnical Note
+= Custom Actions and Checks Technical Note
 
 This document provides a technical overview of the Custom Actions and Checks (SDK) module with the aim of distributing knowledge of how the SDK should work from a technical perspective not a user perspective.
 
