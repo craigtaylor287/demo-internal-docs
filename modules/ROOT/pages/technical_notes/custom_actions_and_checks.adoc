@@ -1,0 +1,88 @@
+= Custom Actions and Checks Tecnical Note
+
+This document provides a technical overview of the Custom Actions and Checks (SDK) module with the aim of distributing knowledge of how the SDK should work from a technical perspective not a user perspective.
+
+ 
+
+== Tables
+
+The module is made up of the following 4 tables:
+
+* Custom Actions (x_priit_autotest_sdk_action)
+** This table stores details about the action such as name and description and acts as a container for Custom Steps.
+* Custom Steps (x_priit_autotest_sdk_action_step)
+** This table stores details about the action being performed.
+** A Custom Step can be compared to a normal User Task and is populated with details in the same way.
+* Custom Checks (x_priit_autotest_sdk_check)
+** This table stores details about the check such as name and description but also details of the check being performed.
+** A Custom Check can be compared to a normal User Task Check and is populated with details in the same way.
+* Custom Data (x_priit_autotest_sdk_data)
+** This table stores the test and check data used by User Tasks and User Task Checks.
+** 1 data record is always inserted for every Custom Step in the chosen Custom Action even if the step does not require any actual test data.
+** 1 data record is always inserted for every Custom Check even if does not require any actual check data.
+* Custom Test Data (x_priit_autotest_custom_data)
+*  This table stores custom data defined by expert users.
+*  This data can then be used elsewhere in the system as actual test data.
+ 
+
+== Overview
+
+When a user creates a Custom Action it also creates an action in the 'x_priit_autotest_action' table allowing it to be selected in a User Tasks action reference field. This same logic applies to creating a Custom Check in that it also creates a check in the 'x_priit_autotest_check' table.
+
+All Custom Actions have a value of 'sdk_xpath_action' and all Custom Checks have a value of 'sdk_xpath_check' so that the Test Engine knows to handle them differently to a normal action or check.
+
+ 
+
+== Data Model
+
+* A Custom Action is made up of 1 or more Custom Steps.
+* A Custom Step is linked to only 1 Custom Action.
+* A Custom Check can be used by 0 or more Custom Actions.
+* A Custom Data record can be linked to either 1 User Task or to 1 User Task Check.
+ 
+
+ 
+
+== Custom Data Records
+
+A fundamental part of the module is the Custom Data table as it allows an xpath based action/check with default test and check data to be used whilst also allowing the user to create test scenarios with their own test and check data without the need to have knowledge of xpaths.
+
+ 
+
+== Custom Data when Creating a User Task
+
+Selecting a Custom Action on a User Task will present the user with a popup form. This form will contain a field for each Custom Step in the chosen action and they will be populated with any default data defined in the Custom Step. The user can choose to keep this data or enter their own before submitting the form. 
+
+Upon submitting the form the User Task is inserted and a default User Task Check is also created. Simultaneously a Custom Data record will be created for each of the Custom Steps and one for the Custom Check and linked to either the User Task or the User Task Check.
+
+ 
+
+== Custom Data when Creating a User Task Check
+
+Selecting a Custom Check on a User Task Check will present the user with a popup form. This form will contain a field for the check data and will be populated with any default data defined in the Custom Check. The user can choose to keep this data of enter their own before submitting the form.
+
+Upon submitting the form the User Task Check is inserted and a Custom Data record is also created with a reference to the User Task Check.
+
+ 
+
+== Custom Data when Updating a User Task
+
+Opening an existing User Task and clicking the 'Edit Test Data' button will present the user with the same popup form they see when creating a new User Task. The fields for each Custom Step will be populated with data from the Custom Data record or if no data record exists it will be populated with default data defined in the Custom Step.
+
+The user can change any of this data before submitting the form.
+
+Upon submitting the form ALL Custom Data records linked to this User Task will be deleted and new Custom Data records inserted for each step. This is to simplify the scripts and to avoid orphaned data records when the number of steps in an action changes or when the action used is changed from one Custom Action to another.
+
+If it is a single-step action and a default User Task Check exists, the User Task Check will be updated and the Custom Data record linked to the User Task Check will also be updated. Note that this data record is not deleted in this scenario but is updated instead as it is always singular.
+
+ 
+
+== Custom Data when Updating a User Task Check
+
+Opening an existing User Task Check and clicking the 'Edit Check Data' button will present the user with the same popup form they see when creating a new User Task Check. The check data field will be populated with data from the Custom Data record or if no data record exists it will be populated with the default data defined in the Custom Check.
+
+The user can change this data before submitting the form.
+
+Upon submitting the form, if the record is a default User Task Check the user must confirm their action using the normal confirmation window that appears when a default User Task Check is about to be converted to a normal User Task Check.
+
+If the user confirms they understand that the User Task Check will no longer be marked as default, the Custom Data record linked to the User Task Check will be updated with the new check data.
