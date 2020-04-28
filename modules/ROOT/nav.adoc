@@ -2,7 +2,7 @@
 ** xref:request_management.adoc[Request Management]
 
 * xref:index.adoc[Technical Notes]
-** xref:custom_actions_and_checks.adoc[Custom Actions & Checks]
+** xref:./technical_notes/custom_actions_and_checks.adoc[Custom Actions & Checks]
 
 
 
